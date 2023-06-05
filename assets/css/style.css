@@ -5,8 +5,8 @@ body {
 main {
   background-image: url("https://ccofrev.github.io/assets/img/bg.png");
   /* Add the blur effect */
-  filter: blur(4px);
-  -webkit-filter: blur(4px);
+  filter: blur(3px);
+  -webkit-filter: blur(3px);
   height: 100vh;
 }
 
