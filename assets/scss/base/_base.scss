@@ -1,10 +1,11 @@
 body{
-    background-image: $bg_img;
     background-color: $bg_color;
 }
 
-.divTabla{
-    margin: 10px;
-    margin-top: 50px;
-    
+main{
+    background-image: $bg_img;
+    /* Add the blur effect */
+    filter: blur(4px);
+    -webkit-filter: blur(4px);
+    height: 100vh;
 }
