@@ -1,34 +1,64 @@
-.bg-color{
-    background-color: #394867 !important;
-}
 
-.bg-body-tertiary{
-    background-color: #F1F6F9 !important;
-}
+body {
+    margin: 0;
+    padding: 0;
+    background-color: $bg_color;
+  }
+
+  /* Grilla con flexbox */
+  .navbar, .carousel, .titular, .columns, .footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .navbar{
+    background-color: $bg_navbar_color;
+  }
+  
+  .titular {
+    flex-direction: column;
+    align-items: center;
+    padding:10px;
+    color: $text_color;
+  }
+  
+  .columns {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .column {
+    padding: 10px;
+    flex-basis: 25%;
+    text-align: center; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: $text_color;
+  }
+  
+  .footer {
+    margin-top: 30px;
+    background-color: $bg_footer_color;
+  }
 
 
-.celdaTitulo{
-    padding: 20px;
-    padding-bottom: 30px;
-    padding-top: 40px;
-    color: #F1F6F9;
-}
+  @media (min-width: 768px) {
+    .column {
+      flex-basis: 50%;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .column {
+      flex-basis: 25%;
+    }
+ }
 
-.celdasPilares{
-    color: #F1F6F9;
-}
-
-.classFooter{
-    margin-top:30px;
-    background-color: #F1F6F9;
-}
-
-.col{
-    border: #F1F6F9;
-}
-
-
-
+  
 
 
 
