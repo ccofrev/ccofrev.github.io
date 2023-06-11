@@ -7,6 +7,9 @@
 // 3. Del siguiente arreglo de objetos, retornar otro arreglo con los pokemon tipo 
 // fuego. 
 
+
+///// ACTIVIDAD 1 
+
 function fibonacci(tope) {
   var salida = [0, 1];
   
@@ -15,13 +18,24 @@ function fibonacci(tope) {
   return salida
 }
 
+
 fibonacci1000 = fibonacci(1000)
-console.log("Fibonacci hasta 1000", fibonacci1000.join(', '))
-console.log("Fibonacci hasta 1000 solo pares", fibonacci1000.filter((val)=>val%2===0).join(', '))
-console.log("Fibonacci hasta 1000 solo impares", fibonacci1000.filter((val)=>val%2===1).join(', '))
+fibonacci1000pares = fibonacci1000.filter((val)=>val%2===0)
+fibonacci1000impares = fibonacci1000.filter((val)=>val%2===1)
+
+// 1a
+console.log("Fibonacci hasta 1000", fibonacci1000)
+document.getElementById("parte1a").innerHTML = fibonacci1000.join(', ')
+
+// 1b
+console.log("Fibonacci hasta 1000 solo pares", fibonacci1000pares)
+document.getElementById("parte1b").innerHTML = fibonacci1000pares.join(', ')
+// 1c
+console.log("Fibonacci hasta 1000 solo impares", fibonacci1000impares)
+document.getElementById("parte1c").innerHTML = fibonacci1000impares.join(', ')
 
 
-
+//// ACTIVIDAD 2
 let pokemon1 =
 [
  'Pikachu',
@@ -29,8 +43,13 @@ let pokemon1 =
  'Bulbasaur',
  'Squirtle'
 ]
-console.log(pokemon1.map((poke=>poke.toUpperCase())).join(', '))
 
+arrPokeMayus = pokemon1.map((poke=>poke.toUpperCase()))
+console.log(arrPokeMayus)
+document.getElementById("parte2").innerHTML = arrPokeMayus.join(', ')
+
+
+/// ACTIVIDAD 3
 let pokemon2 = [
     {
     nombre: 'Pikachu',
@@ -62,5 +81,7 @@ let pokemon2 = [
     }
    ]
    
+   arrPokeFuego = pokemon2.filter(poke=>poke.tipo==='Fuego').map((pok=>pok.nombre)) 
+   console.log(arrPokeFuego)
+   document.getElementById("parte3").innerHTML = arrPokeFuego.join(', ')
    
-   console.log(pokemon2.filter(poke=>poke.tipo==='Fuego'))
