@@ -46,21 +46,17 @@ async function getListPoke() {
     const dataListaPoke = rowLPJson.results;
     
     // Segunda consulta utilizando los datos de la primera consulta
-    //salida = []
-    // console.log(await getDataPoke(dataListaPoke[0]))
     let htmlContent = ''
     let dataPoke = []
     dataListaPoke.forEach(async poke => {
-      //salida.push(getDataPoke(poke))
       dataPoke = await getDataPoke(poke)
       console.log(dataPoke)
-      document.getElementById("contenedor").innerHTML =  document.getElementById("contenedor").innerHTML + `<div class="card">
+      document.getElementById("contenedor").innerHTML =  document.getElementById("contenedor").innerHTML + 
+                                    `<div class="card">
                                       <img src=${dataPoke.sprites.other.dream_world.front_default} alt=${dataPoke.name}>
                                       <h3>${dataPoke.name.toUpperCase()}</h3>
-
                                     </div>`;
       });
-    
 
   } catch (error) {
     console.error('Error:', error);
