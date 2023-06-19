@@ -1,87 +1,76 @@
-// 1. Mostrar en consola la secuencia de Fibonacci: 
-// a. Entre los números 0 y 1000.
-// b. Números pares entre 0 y 1000.
-// c. Números impares entre 0 y 1000.
-// Hint: Puedes usar recursividad o algún ciclo o método iterador visto en clase
-// 2. Del siguiente arreglo de strings retornar otro arreglo con todo a mayúsculas. 
-// 3. Del siguiente arreglo de objetos, retornar otro arreglo con los pokemon tipo 
-// fuego. 
+// 1. Consumir el siguiente endpoint https://pokeapi.co/api/v2/pokemon/ y mostrar en 
+// el front lo siguiente:
+// a) Cards que contengan los 20 primeros pokemones (imagen y nombre del pokemon)
+// b) Utilizar Async / Await para trabajar las promesas de forma asíncrona
+// c) Usar Axios o Fetch para realizar la solicitud al endpoint mencionado
+// d) Ocupar Try / Catch para el manejo de errores
 
 
-///// ACTIVIDAD 1 
+///// ACTIVIDAD 
 
-function fibonacci(tope) {
-  var salida = [0, 1];
-  
-  while (salida[salida.length - 1] + salida[salida.length - 2] <= tope)
-    salida.push(salida[salida.length - 1] + salida[salida.length - 2])
-  return salida
+// const listaPokemones = async (desde=0, hasta=20) => {
+//   try{
+//       // const URL = "https://pokeapi.co/api/v2/pokemon/"
+//       const URL = `https://pokeapi.co/api/v2/pokemon/?offset=${desde}&limit=${hasta-desde}`
+//       const dataRow = await fetch(URL)
+//       const data = await dataRow.json()
+//       return data
+//   }catch(error){
+//       console.log("hubo error", error)
+//   }finally{
+//       console.log("esto siempre se ejecuta")
+//   }
+// }
+
+// const getPokesInfo = async (dataresults) => {
+//   const salida = await dataresults.map(async poke => {
+//     const dataRowPoke = await fetch(poke.url)
+//     const dataPoke = await dataRowPoke.json()
+//     return await dataPoke.name
+//     });
+// }
+
+// const lista = listaPokemones()
+// console.log(lista)
+// listaFull.forEach(element => {
+//   console.log(element.name)
+// });
+
+
+async function getListPoke() {
+  const URL = 'https://pokeapi.co/api/v2/pokemon/'
+  try {
+    // Primera consulta a la API
+    const rowListaPoke = await fetch(URL);
+    const rowLPJson = await rowListaPoke.json();
+    const dataListaPoke = rowLPJson.results;
+    
+    // Segunda consulta utilizando los datos de la primera consulta
+    //salida = []
+    // console.log(await getDataPoke(dataListaPoke[0]))
+    let htmlContent = ''
+    let dataPoke = []
+    dataListaPoke.forEach(async poke => {
+      //salida.push(getDataPoke(poke))
+      dataPoke = await getDataPoke(poke)
+      console.log(dataPoke)
+      document.getElementById("contenedor").innerHTML =  document.getElementById("contenedor").innerHTML + `<div class="card">
+                                      <img src=${dataPoke.sprites.other.dream_world.front_default} alt=${dataPoke.name}>
+                                      <h3>${dataPoke.name.toUpperCase()}</h3>
+
+                                    </div>`;
+      });
+    
+
+  } catch (error) {
+    console.error('Error:', error);
+  }
 }
 
+async function getDataPoke(poke){
+  let rowPoke = await fetch(poke.url)
+  let dataPoke = await rowPoke.json()
+  return dataPoke;
+}
 
-fibonacci1000 = fibonacci(1000)
-fibonacci1000pares = fibonacci1000.filter((val)=>val%2===0)
-fibonacci1000impares = fibonacci1000.filter((val)=>val%2===1)
-
-// 1a
-console.log("Fibonacci hasta 1000", fibonacci1000)
-document.getElementById("parte1a").innerHTML = fibonacci1000.join(', ')
-
-// 1b
-console.log("Fibonacci hasta 1000 solo pares", fibonacci1000pares)
-document.getElementById("parte1b").innerHTML = fibonacci1000pares.join(', ')
-// 1c
-console.log("Fibonacci hasta 1000 solo impares", fibonacci1000impares)
-document.getElementById("parte1c").innerHTML = fibonacci1000impares.join(', ')
-
-
-//// ACTIVIDAD 2
-let pokemon1 =
-[
- 'Pikachu',
- 'Charmander',
- 'Bulbasaur',
- 'Squirtle'
-]
-
-arrPokeMayus = pokemon1.map((poke=>poke.toUpperCase()))
-console.log(arrPokeMayus)
-document.getElementById("parte2").innerHTML = arrPokeMayus.join(', ')
-
-
-/// ACTIVIDAD 3
-let pokemon2 = [
-    {
-    nombre: 'Pikachu',
-    tipo: 'Electrico'
-    },
-    {
-    nombre: 'Charmander',
-    tipo: 'Fuego',
-    },
-    {
-    nombre: 'Bulbasaur',
-    tipo: 'Planta'
-    },
-    {
-    nombre: 'Squirtle',
-    tipo: 'Agua'
-    },
-    {
-    nombre: 'Charmeleon',
-    tipo: 'Fuego'
-    },
-    {
-    nombre: 'Weedle',
-    tipo: 'bicho'
-    },
-    {
-    nombre: 'Charizard',
-    tipo: 'Fuego'
-    }
-   ]
-   
-   arrPokeFuego = pokemon2.filter(poke=>poke.tipo==='Fuego').map((pok=>pok.nombre)) 
-   console.log(arrPokeFuego)
-   document.getElementById("parte3").innerHTML = arrPokeFuego.join(', ')
-   
+getListPoke()
