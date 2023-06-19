@@ -8,35 +8,6 @@
 
 ///// ACTIVIDAD 
 
-// const listaPokemones = async (desde=0, hasta=20) => {
-//   try{
-//       // const URL = "https://pokeapi.co/api/v2/pokemon/"
-//       const URL = `https://pokeapi.co/api/v2/pokemon/?offset=${desde}&limit=${hasta-desde}`
-//       const dataRow = await fetch(URL)
-//       const data = await dataRow.json()
-//       return data
-//   }catch(error){
-//       console.log("hubo error", error)
-//   }finally{
-//       console.log("esto siempre se ejecuta")
-//   }
-// }
-
-// const getPokesInfo = async (dataresults) => {
-//   const salida = await dataresults.map(async poke => {
-//     const dataRowPoke = await fetch(poke.url)
-//     const dataPoke = await dataRowPoke.json()
-//     return await dataPoke.name
-//     });
-// }
-
-// const lista = listaPokemones()
-// console.log(lista)
-// listaFull.forEach(element => {
-//   console.log(element.name)
-// });
-
-
 async function getListPoke() {
   const URL = 'https://pokeapi.co/api/v2/pokemon/'
   try {
