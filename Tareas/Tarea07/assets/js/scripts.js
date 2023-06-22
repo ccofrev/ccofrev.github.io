@@ -8,8 +8,29 @@
 
 ///// ACTIVIDAD 
 
-async function getListPoke() {
-  const URL = 'https://pokeapi.co/api/v2/pokemon/'
+async function getListPoke(desde=0, hasta=20) {
+  // const URL = 'https://pokeapi.co/api/v2/pokemon/'
+  const URL = `https://pokeapi.co/api/v2/pokemon/?offset=${desde}&limit=${hasta-desde}`
+  const dicTipos = {
+    'normal':'normal',
+    'fire':'fuego',
+    'grass':'planta',
+    'bug': 'bicho', 
+    'dragon':'dragón', 
+    'electric':'eléctrico', 
+    'fairy':'hada', 
+    'fighting':'lucha', 
+    'flying':'volador', 
+    'ghost':'fantasma', 
+    'ground':'tierra', 
+    'ice':'hielo', 
+    'poison':'veneno', 
+    'psychic':'psíquico', 
+    'rock':'roca', 
+    'steel':'acero', 
+    'water':'agua',
+    'dark':'siniestro'
+  }
   try {
     // Primera consulta a la API
     const rowListaPoke = await fetch(URL);
@@ -17,18 +38,26 @@ async function getListPoke() {
     const dataListaPoke = rowLPJson.results;
     
     // Segunda consulta utilizando los datos de la primera consulta
-    let htmlContent = ''
     let dataPoke = []
     dataListaPoke.forEach(async poke => {
       dataPoke = await getDataPoke(poke)
-      console.log(dataPoke)
+      // console.log(dataPoke)
+      let t =  await getAttributePoke('types', 'type', dataPoke)
+      let tipos = t.map(tipo => dicTipos[tipo.name])
       document.getElementById("contenedor").innerHTML =  document.getElementById("contenedor").innerHTML + 
                                     `<div class="card">
                                       <img src=${dataPoke.sprites.other.dream_world.front_default} alt=${dataPoke.name}>
                                       <h3>${dataPoke.name.toUpperCase()}</h3>
+                                      <ul>
+                                        <li><strong>Experiencia base:</strong> ${dataPoke.base_experience}</li>
+                                        <li><strong>Estatura:</strong> ${dataPoke.height}</li>
+                                        <li><strong>Peso:</strong> ${dataPoke.weight}</li>
+                                        <li><strong>Tipo${tipos.length>1?'s':''}:</strong> ${tipos.join(', ')}</li>
+                                      </ul>
                                     </div>`;
-      });
 
+
+      });
   } catch (error) {
     console.error('Error:', error);
   }
@@ -38,6 +67,14 @@ async function getDataPoke(poke){
   let rowPoke = await fetch(poke.url)
   let dataPoke = await rowPoke.json()
   return dataPoke;
+}
+
+async function getAttributePoke(plural, singular, dPoke){
+  let features = []
+  dPoke[plural].forEach(async element =>{
+    features.push(element[singular])
+  })
+  return features
 }
 
 getListPoke()
