@@ -4,8 +4,9 @@
   padding-right: 40px;
   display: flex;  
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+
 }
 
 #parte1a, #parte1b, #parte1c, #parte2, #parte3{
@@ -20,10 +21,11 @@
   padding: 10px;
   margin:10px;
   margin-bottom: 10px;
+  flex: 1 0 300px;
 }
 
 .card img {
-  height: 300px;
+  height: 200px;
   padding: 5px;
   border-radius: 5px;
   border: 1px solid #ccc;
