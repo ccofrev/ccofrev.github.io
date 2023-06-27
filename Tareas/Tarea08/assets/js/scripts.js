@@ -138,7 +138,7 @@ async function getPersonaje(id) {
 
 
 // se inyectan 20 personajes
-for(let i=1; i<=200; i++)
+for(let i=1; i<=20; i++)
   getPersonaje(i).then(personaje => {
     personaje.show('contenedor')
     personaje.print()
