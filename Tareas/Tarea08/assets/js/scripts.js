@@ -69,7 +69,7 @@ class Personaje {
       "Mythological Creature": "Criatura mitológica",
       "Humanoid": "Humanoide",
       "Disease": "Enfermedad",
-      "unknown": "Desconocido"
+      "unknown": "Especie desconocida"
     }
     if(dictEspecies[this._especie])
       return dictEspecies[this._especie]
