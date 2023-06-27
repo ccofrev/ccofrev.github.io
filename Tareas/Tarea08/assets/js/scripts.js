@@ -90,6 +90,20 @@ class Personaje {
       return this._genero
   }
 
+  // Método para devolver el estado en español si es conocido. Si no lo es, devuelve el original en inglés.
+  getEstadoEs(){
+    const dictEstados = {
+      "Alive": "Vivo",
+      "Dead": "Muerto",
+      "unknown": "Se desconoce si está vivo"
+    }
+    if(dictEstados[this._estado])
+      return dictEstados[this._estado]
+    else
+      return this._estado
+  }
+
+
   // 'consologuea' el objeto
   print() {
     console.log(this)
@@ -105,7 +119,7 @@ class Personaje {
       <div class="card-content">
         <h2>${this._nombre}</h2>
         <ul class="character-info">
-          <li class="${this._estado==="Alive"?"Verde":(this._estado=='Dead'?"Rojo":"unknown")}"><i class="fa-solid ${this._estado==='Dead'?"fa-skull-crossbones":(this._estado=='Alive'?"fa-heart-pulse":"fa-circle-question")} fa-xs" aria-label="Corazón"></i> ${this.getEspecieEs()}</li>
+          <li class="${this._estado==="Alive"?"Verde":(this._estado=='Dead'?"Rojo":"unknown")}"><i class="fa-solid ${this._estado==='Dead'?"fa-skull-crossbones":(this._estado=='Alive'?"fa-heart-pulse":"fa-circle-question")} fa-xs" title="${this.getEstadoEs()}"></i> ${this.getEspecieEs()}</li>
           <li class="${this._genero=="Male"?"Azul":(this._genero=="Female"?"Rojo":"unknown")}"><i class="fa-solid ${this._genero=="Male"?"fa-mars":(this._genero=="Female"?"fa-venus":"fa-circle-question")} fa-xs"></i> ${this.getGeneroEs()}</li>
         </ul>
       </div>
