@@ -38,9 +38,9 @@ async function getListPoke(desde=0, hasta=20) {
 
   try {
     // Primera consulta a la API
-    const rowListaPoke = await fetch(URL);
-    const rowLPJson = await rowListaPoke.json();
-    const dataListaPoke = rowLPJson.results;
+    const rawListaPoke = await fetch(URL);
+    const rawLPJson = await rawListaPoke.json();
+    const dataListaPoke = rawLPJson.results;
     
     // Segunda consulta utilizando los datos de la primera consulta y funciones auxiliares
     let dataPoke = []
