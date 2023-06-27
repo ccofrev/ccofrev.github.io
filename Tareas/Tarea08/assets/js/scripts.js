@@ -105,10 +105,8 @@ class Personaje {
       <div class="card-content">
         <h2>${this._nombre}</h2>
         <ul class="character-info">
-          <li class="${this._estado==="Alive"?"Verde":(this._estado=='Dead'?"Rojo":"unknown")}"><i class="fa-solid ${this._estado==='Dead'?"fa-skull-crossbones":(this._estado=='Alive'?"fa-heart-pulse":"fa-circle-question")} fa-xs"></i> ${this.getEspecieEs()}</li>
+          <li class="${this._estado==="Alive"?"Verde":(this._estado=='Dead'?"Rojo":"unknown")}"><i class="fa-solid ${this._estado==='Dead'?"fa-skull-crossbones":(this._estado=='Alive'?"fa-heart-pulse":"fa-circle-question")} fa-xs" aria-label="Corazón"></i> ${this.getEspecieEs()}</li>
           <li class="${this._genero=="Male"?"Azul":(this._genero=="Female"?"Rojo":"unknown")}"><i class="fa-solid ${this._genero=="Male"?"fa-mars":(this._genero=="Female"?"fa-venus":"fa-circle-question")} fa-xs"></i> ${this.getGeneroEs()}</li>
-        </ul>
-        <ul>
         </ul>
       </div>
     </div>`;
