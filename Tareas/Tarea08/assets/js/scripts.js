@@ -14,52 +14,115 @@
 
 // se define la clase personaje
 class Personaje {
-  constructor(nombre, especie, imagen, estado, genero) {
+  constructor(nombre, especie, imagen, id=-1, tipo='unknown', origen='unknown', locacion='unknown', episodio1='unknown', estado='unknown', genero='unknown', url='unknown', creado='unknown') {
     this._nombre = nombre;
     this._especie = especie;
     this._imagen = imagen;
+    this._id = id;
+    this._tipo = tipo;
+    this._origen = origen;
+    this._locacion = locacion;
+    this._episodio1 = episodio1;
     this._estado = estado;
     this._genero = genero;
+    this._url = url;
+    this._creado = creado;
+  }
+
+  get id() {
+    return this._id;
+  }
+
+  set id(value) {
+    this._id = value;
+  }
+
+  get tipo() {
+    return this._tipo;
+  }
+
+  set tipo(value) {
+    this._tipo = value;
+  }
+
+  get origen() {
+    return this._origen;
+  }
+
+  set origen(value) {
+    this._origen = value;
+  }
+
+  get locacion() {
+    return this._locacion;
+  }
+
+  set locacion(value) {
+    this._locacion = value;
+  }
+
+  get episodio1() {
+    return this._episodio1;
+  }
+
+  set episodio1(value) {
+    this._episodio1 = value;
   }
 
   get nombre() {
     return this._nombre;
   }
 
-  set nombre(nuevoNombre) {
-    this._nombre = nuevoNombre;
+  set nombre(value) {
+    this._nombre = value;
   }
 
   get especie() {
     return this._especie;
   }
 
-  set especie(nuevaEspecie) {
-    this._especie = nuevaEspecie;
+  set especie(value) {
+    this._especie = value;
   }
 
   get imagen() {
     return this._imagen;
   }
 
-  set imagen(nuevaImagen) {
-    this._imagen = nuevaImagen;
+  set imagen(value) {
+    this._imagen = value;
   }
 
   get estado() {
     return this._estado;
   }
 
-  set estado(nuevoEstado) {
-    this._estado = nuevoEstado;
+  set estado(value) {
+    this._estado = value;
   }
 
   get genero() {
     return this._genero;
   }
 
-  set genero(nuevoGenero) {
-    this._genero = nuevoGenero;
+  set genero(value) {
+    this._genero = value;
+  }
+
+  get url() {
+    return this._url;
+  }
+
+  set url(value) {
+    this._url = value;
+  }
+
+  get creado() {
+    return this._creado;
+  }
+
+  set creado(value) {
+    this._creado = value;
   }
 
   // Método para devolver la especie en español si es conocida. Si no lo es, se devuelve la original en inglés
@@ -109,18 +172,21 @@ class Personaje {
     console.log(this)
   }
 
-  // show toma el contenido de un elemento del dom de id=contenedor y agrega la card del 
-  // personaje
+  // show toma el contenido de un elemento del dom de id=contenedor y agrega la card del personaje
   show(contenedor) {
       
     document.getElementById(contenedor).innerHTML +=
     `<div class="card">
       <img src="${this._imagen}" alt="${this._nombre}">
       <div class="card-content">
-        <h2>${this._nombre}</h2>
+        <h2>#${this._id}. ${this._nombre}</h2>
         <ul class="character-info">
           <li class="${this._estado==="Alive"?"Verde":(this._estado=='Dead'?"Rojo":"unknown")}"><i class="fa-solid ${this._estado==='Dead'?"fa-skull-crossbones":(this._estado=='Alive'?"fa-heart-pulse":"fa-circle-question")} fa-xs" title="${this.getEstadoEs()}"></i> ${this.getEspecieEs()}</li>
           <li class="${this._genero=="Male"?"Azul":(this._genero=="Female"?"Rojo":"unknown")}"><i class="fa-solid ${this._genero=="Male"?"fa-mars":(this._genero=="Female"?"fa-venus":"fa-circle-question")} fa-xs"></i> ${this.getGeneroEs()}</li>
+          <li><i class="fa-solid fa-globe fa-xs" title="Origen"></i> ${this._origen.name}</li>
+          <li><i class="fa-solid fa-location-dot fa-xs" title="Locacion actual"></i> ${this._locacion.name}</li>
+          <li><i class="fa-solid fa-film fa-xs" title="Capítulo primera aparición"></i> ${this._episodio1}</li>
+          <li><a href="${this._url}"><i class="fa-solid fa-link fa-xs" title="URL"></i> URL </a></li>
         </ul>
       </div>
     </div>`;
@@ -140,7 +206,16 @@ async function getPersonaje(id) {
     const PersonajeJson = await rawPersonaje.json();
     
     // se crea objeto personaje y se devuelve como resultado de la función
-    const personaje = new Personaje(PersonajeJson.name, PersonajeJson.species, PersonajeJson.image, PersonajeJson.status, PersonajeJson.gender);
+    // se crea el objeto de esta forma para respetar lo solicitado originalmente en la tarea y para usar setters
+    const personaje = new Personaje(PersonajeJson.name, PersonajeJson.species, PersonajeJson.image)
+    personaje.id = PersonajeJson.id;
+    personaje.estado = PersonajeJson.status;
+    personaje.genero = PersonajeJson.gender;
+    personaje.url = PersonajeJson.url;
+    personaje.origen = PersonajeJson.origin;
+    personaje.locacion = PersonajeJson.location;
+    personaje.episodio1 = PersonajeJson.episode[0].split('/')[5]
+
     return personaje;
     
   } catch (error) {
@@ -155,3 +230,7 @@ for(let i=1; i<=20; i++)
     personaje.show('contenedor')
     personaje.print()
   })
+
+
+  
+

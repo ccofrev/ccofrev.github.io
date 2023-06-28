@@ -25,13 +25,12 @@
 
 .card img {
   width: 100%;
-  height: 200px; /* Nuevo */
+  height: 200px; 
   border-radius: 5px;
   
-  //object-fit: cover; /* Para asegurar que la imagen se ajuste correctamente */
-  display: block; /* Para centrar la imagen */
-  margin: 0 auto; /* Para centrar la imagen */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Nuevo */
+  display: block; 
+  margin: 0 auto; 
+  border: 2px solid darkgray;
 }
 
 .card-content {
