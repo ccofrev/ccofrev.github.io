@@ -181,8 +181,8 @@ class Personaje {
       <div class="card-content">
         <h2>#${this._id}. ${this._nombre}</h2>
         <ul class="character-info">
-          <li class="${this._estado==="Alive"?"Verde":(this._estado=='Dead'?"Rojo":"unknown")}"><i class="fa-solid ${this._estado==='Dead'?"fa-skull-crossbones":(this._estado=='Alive'?"fa-heart-pulse":"fa-circle-question")} fa-xs" title="${this.getEstadoEs()}"></i> ${this.getEspecieEs()}</li>
-          <li class="${this._genero=="Male"?"Azul":(this._genero=="Female"?"Rojo":"unknown")}"><i class="fa-solid ${this._genero=="Male"?"fa-mars":(this._genero=="Female"?"fa-venus":"fa-circle-question")} fa-xs"></i> ${this.getGeneroEs()}</li>
+          <li class="${this._estado==="Alive"?"Verde":(this._estado==='Dead'?"Rojo":"unknown")}"><i class="fa-solid ${this._estado==='Dead'?"fa-skull-crossbones":(this._estado==='Alive'?"fa-heart-pulse":"fa-circle-question")} fa-xs" title="${this.getEstadoEs()}"></i> ${this.getEspecieEs()}</li>
+          <li class="${this._genero==="Male"?"Azul":(this._genero==="Female"?"Rojo":"unknown")}"><i class="fa-solid ${this._genero==="Male"?"fa-mars":(this._genero==="Female"?"fa-venus":"fa-circle-question")} fa-xs"></i> ${this.getGeneroEs()}</li>
           <li><i class="fa-solid fa-globe fa-xs" title="Origen"></i> ${this._origen.name}</li>
           <li><i class="fa-solid fa-location-dot fa-xs" title="Locacion actual"></i> ${this._locacion.name}</li>
           <li><i class="fa-solid fa-film fa-xs" title="Capítulo primera aparición"></i> ${this._episodio1}</li>
