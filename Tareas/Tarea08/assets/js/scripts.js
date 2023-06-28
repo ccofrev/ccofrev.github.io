@@ -214,7 +214,7 @@ async function getPersonaje(id) {
     personaje.url = PersonajeJson.url;
     personaje.origen = PersonajeJson.origin;
     personaje.locacion = PersonajeJson.location;
-    personaje.episodio1 = PersonajeJson.episode[0].split('/')[5]
+    personaje.episodio1 = Number(PersonajeJson.episode[0].split('/')[5])
 
     return personaje;
     
